@@ -92,3 +92,14 @@ I knew that wizbang was allowed to pass traffic because on the client console, w
 Finally I performed an NMAP scan for what ports were open on the server. As you can see below, port 10021 is open. 
 
 ![image](https://github.com/user-attachments/assets/1f56a9af-00db-483e-a596-a927c66555c6)
+
+## Tools/Software 
+wizbang
+
+wireshark
+
+nmap
+
+kali
+
+iptables 
