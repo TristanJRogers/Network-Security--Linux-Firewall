@@ -41,4 +41,54 @@ telnet capture
 
 ## Task 3: Use iptables to limit traffic to the server
 
+In this task we used the IP tables on the firewall to prevent it from forwarding any traffic to the server unless it is SSH or HTTP traffic. 
+
+After place the rules needed to verify that SSH and HTTP were being allowed while also disallowing other traffic such as telnet.
+
+SSH proof
+
+![image](https://github.com/user-attachments/assets/a521fd11-bfa8-482f-9fd8-4c85f89459fa)
+
+![image](https://github.com/user-attachments/assets/db7d420d-33da-4821-bbb3-0d2629d46ee4)
+
+I knew that SSH was working because on the client, after running the “ssh server’ command, I was prompted to input a password. I could also see that the client and the server initiated a three way handshake as shown in the screen shot. The server and client also exchanged a key via the diffie-hellman protocol which showed that encryption had started which is used by SSH.
+
+HTTP proof
+
+![image](https://github.com/user-attachments/assets/095826f0-0b2b-4369-97da-a53cda751de3)
+
+![image](https://github.com/user-attachments/assets/06cacea6-2533-44d6-b676-d0c3d7304dc9)
+
+I knew that HTTP was working because on the client, after I ran the wget server command, I was given a message that stated connected. Additionally, I was given the index.html.3 file. When looking at Wireshark, I could see that a three way handshake was completed, further proving that HTTP traffic was allowed to pass the firewall. 
+
+Telnet Proof
+
+![image](https://github.com/user-attachments/assets/a0410418-d949-419d-9cfd-8a100099f088)
+
+![image](https://github.com/user-attachments/assets/feea8b87-ae4d-43e9-9e6d-687fd0ceee1a)
+
+When running the “telnet server” command, the console did not change from “Trying 172.25.0.3". This proves that telnet is not connecting. Additionally when looking at the Wireshark capture, we can see that a TCP handshake was never completed. 
+
+Finally I ran an NMAP scan on the client for open ports on the server.
+
+![image](https://github.com/user-attachments/assets/88f7bdd4-06db-4f18-a29c-1d34dc366d09)
+
 ## Task 4: Open a new service port
+
+In task four the client computer needed the wizbang program to be allowed to send traffic to the server.
+
+When running ./wizbang I needed to see what port it attempted to connect to (port 10021). Next I needed to alter the iptables to allow the service. 
+
+wizbang on client
+
+![image](https://github.com/user-attachments/assets/09561c0c-f5ed-4e75-83d7-162bfbb3f452)
+
+wizbang file capture via wireshark
+
+![image](https://github.com/user-attachments/assets/1329364a-0bd3-4590-901c-59b7559af902)
+
+I knew that wizbang was allowed to pass traffic because on the client console, when I ran the “./wizbang Good Morning” it ran the command and then presented me with “bye”. Before I created the rule, this did not happen. Additionally, when looking at the Wireshark scans, I could see that a TCP handshake was created on port 10021, which is what wizbang uses. 
+
+Finally I performed an NMAP scan for what ports were open on the server. As you can see below, port 10021 is open. 
+
+![image](https://github.com/user-attachments/assets/1f56a9af-00db-483e-a596-a927c66555c6)
